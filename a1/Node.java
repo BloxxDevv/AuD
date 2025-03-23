@@ -44,7 +44,8 @@ public class Node {
 
     public void toArray(IMember[] array){
         array[index] = data;
-        nextNode.toArray(array);
+        if (nextNode != null)
+            nextNode.toArray(array);
     }
 
     public IMember getData(){
@@ -64,6 +65,43 @@ public class Node {
             }
         }else{
             return currentSize;
+        }
+    }
+
+    public boolean removeMember(IMember m) {
+        if (data.equals(m)) {
+            if (nextNode != null) {
+                this.data = nextNode.data;
+                this.index = nextNode.index;
+                this.nextNode = nextNode.nextNode;
+            } else {
+                this.data = null;
+                this.index = -1;
+                this.nextNode = null;
+                return true;
+            }
+            updateIndexes(nextNode, index);
+
+        }
+
+        if (nextNode != null) {
+            if (nextNode.data.equals(m)) {
+                nextNode = nextNode.nextNode;
+                updateIndexes(this, index);
+            } else {
+                nextNode.removeMember(m);
+            }
+        }
+        return false;
+
+
+    }
+
+    private void updateIndexes(Node node, int startIndex) {
+        while (node != null) {
+            node.index = startIndex;
+            startIndex++;
+            node = node.nextNode;
         }
     }
 }

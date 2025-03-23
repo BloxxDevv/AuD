@@ -29,7 +29,7 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
 
     @Override
     public boolean remove(IMember m) {
-        return false;
+        return firstNode.removeMember(m);
     }
 
     @Override
