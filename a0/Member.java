@@ -48,7 +48,7 @@ public class Member implements IMember {
 
     @Override
     public int compareTo(IMember o) {
-        return 0;
+        return getId().compareTo(o.getId());
     }
     
     public Member(String dataInput){
