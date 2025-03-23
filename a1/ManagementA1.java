@@ -65,12 +65,28 @@ public class ManagementA1 implements IManagement {
 
     @Override
     public IAlgoCollection<IMember> members(String surname, String forename) {
-        return null;
+        IAlgoCollection<IMember> coll = new AlgoLinkedList();
+
+        for (int i = 0; i <members.size(); i++) {
+            if (members.toArray()[i].getSurname().equals(surname) && members.toArray()[i].getForename().equals(forename)){
+                coll.add(members.toArray()[i]);
+            }
+        }
+
+        return coll;
     }
 
     @Override
     public IAlgoCollection<IMember> members(Group group) {
-        return null;
+        IAlgoCollection<IMember> coll = new AlgoLinkedList();
+
+        for (int i = 0; i <members.size(); i++) {
+            if (members.toArray()[i].getGroup().equals(group)){
+                coll.add(members.toArray()[i]);
+            }
+        }
+
+        return coll;
     }
 
     @Override
