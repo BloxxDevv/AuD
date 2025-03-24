@@ -96,7 +96,13 @@ public class ManagementA1 implements IManagement {
 
     @Override
     public int size(Group group) {
-        return 0;
+        int number =0;
+        for (int i = 0; i <members.size(); i++) {
+            if (members.toArray()[i].getGroup().equals(group)){
+                number++;
+            }
+        }
+        return number;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package de.ostfalia.aud.ss25.a1;
 
+import de.ostfalia.aud.ss25.a0.Member;
 import de.ostfalia.aud.ss25.base.IAlgoCollection;
 import de.ostfalia.aud.ss25.base.IMember;
 
@@ -11,6 +12,10 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
     private Node lastNode = null;
 
     private int size = 0;
+
+    public Node getFirstNode() {
+        return firstNode;
+    }
 
     @Override
     public boolean add(IMember m) {
@@ -29,12 +34,55 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
 
     @Override
     public boolean remove(IMember m) {
-        return firstNode.removeMember(m);
+        Node current = firstNode;
+        while (current != null){
+            if (current.getData().equals(m)) {
+                if (current.getNextNode() != null) {
+                    current.setData(current.getNextNode().getData());
+                    current.setIndex(current.getNextNode().getIndex());
+                    current.setNextNode(current.getNextNode().getNextNode());
+                } else {
+                    current.setData(null);
+                    current.setIndex(-1);
+                    current.setNextNode(null);
+                    return true;
+                }
+                updateIndexes(current.getNextNode(), current.getIndex());
+
+            }
+
+            if (current.getNextNode() != null) {
+                if (current.getNextNode().getData().equals(m)) {
+                    current.setNextNode(current.getNextNode().getNextNode());
+                    updateIndexes(current, current.getIndex());
+                    break;
+                }
+            }
+            current = current.getNextNode();
+        }
+
+        return false;
+    }
+
+    private void updateIndexes(Node node, int startIndex) {
+        while (node != null) {
+            node.setIndex(startIndex);
+            startIndex++;
+            node = node.getNextNode();
+        }
     }
 
     @Override
     public IMember get(IMember m) {
-        return firstNode.get(m);
+        Node current = firstNode;
+        IMember member = null;
+        while (current != null){
+            member = current.get(m);
+            if (member != null)
+                break;
+            else current = current.getNextNode();
+        }
+        return member;
     }
 
     @Override
@@ -54,7 +102,13 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
 
     @Override
     public int indexOf(IMember m) {
-        return firstNode.indexOf(m);
+        Node current = firstNode;
+        while (current != null){
+            if (current.get(m) != null)
+                break;
+            else current = current.getNextNode();
+        }
+        return current != null ? current.getIndex() : -1;
     }
 
     @Override
@@ -65,7 +119,19 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
     @Override
     public int size(Comparator<IMember> c, IMember m) {
         if (size == 0) return 0;
-        return firstNode.size(c, m, 0);
+
+        Node current = firstNode;
+
+        int counter = 0;
+
+        while (current != null){
+            if (c.compare(current.getData(), m) == 0){
+                counter++;
+            }
+            current = current.getNextNode();
+        }
+
+        return counter;
     }
 
     @Override
@@ -74,8 +140,14 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
 
         IMember[] members = new IMember[size];
 
-        firstNode.toArray(members);
+        Node current = firstNode;
+        int c = 0;
 
+        while (current != null){
+            members[c] = current.getData();
+            c++;
+            current = current.getNextNode();
+        }
         return members;
     }
 

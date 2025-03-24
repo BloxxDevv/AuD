@@ -6,102 +6,60 @@ import java.util.Comparator;
 
 public class Node {
 
+    //Inhalt des Nodes
     private IMember data;
 
+    //Benachbartes node
     private Node nextNode = null;
+    //Stelle der Node
     private int index = 0;
 
+    //Node Konstruktor (Inhalt, Stelle)
     public Node (IMember o, int index){
-        data = o;
+        this.data = o;
         this.index = index;
     }
 
+    //Hänge nächstes node ran. (für addNode das letzte Element)
     public void addNextNode(Node n){
         nextNode = n;
     }
 
+    //Getter
     public Node getNextNode(){
         return nextNode;
     }
 
+    //Returned Member wenn der Inhalt dieses Nodes = m ist (sonst null)
     public IMember get(IMember m){
         if (data.equals(m)){
             return m;
         }
-        if (nextNode != null)
-            return nextNode.get(m);
         return null;
     }
 
-    public int indexOf(IMember m){
-        if (data.equals(m)){
-            return index;
-        }
-        if (nextNode != null)
-            return nextNode.indexOf(m);
-        return -1;
-    }
-
-    public void toArray(IMember[] array){
-        array[index] = data;
-        if (nextNode != null)
-            nextNode.toArray(array);
-    }
-
+    //Getter von IMember aus der Node
     public IMember getData(){
         return data;
     }
 
+    //Inhalt Setter
+    public void setData(IMember data) {
+        this.data = data;
+    }
+
+    //Stelle Setter
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    //Nächstes Node Setter
+    public void setNextNode(Node nextNode) {
+        this.nextNode = nextNode;
+    }
+
+    //Getter der Stelle
     public int getIndex() {
         return index;
-    }
-
-    public int size(Comparator<IMember> c, IMember m, int currentSize) {
-        if (nextNode != null){
-            if (c.compare(data, m) == 0){
-                return nextNode.size(c, m, currentSize+1);
-            }else {
-                return nextNode.size(c, m, currentSize);
-            }
-        }else{
-            return currentSize;
-        }
-    }
-
-    public boolean removeMember(IMember m) {
-        if (data.equals(m)) {
-            if (nextNode != null) {
-                this.data = nextNode.data;
-                this.index = nextNode.index;
-                this.nextNode = nextNode.nextNode;
-            } else {
-                this.data = null;
-                this.index = -1;
-                this.nextNode = null;
-                return true;
-            }
-            updateIndexes(nextNode, index);
-
-        }
-
-        if (nextNode != null) {
-            if (nextNode.data.equals(m)) {
-                nextNode = nextNode.nextNode;
-                updateIndexes(this, index);
-            } else {
-                nextNode.removeMember(m);
-            }
-        }
-        return false;
-
-
-    }
-
-    private void updateIndexes(Node node, int startIndex) {
-        while (node != null) {
-            node.index = startIndex;
-            startIndex++;
-            node = node.nextNode;
-        }
     }
 }
