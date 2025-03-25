@@ -106,10 +106,13 @@ public class ManagementA1 implements IManagement {
     @Override
     public int size(Group group) {
         int number =0;
+        Node n = ((AlgoLinkedList)members).getFirstNode();
+
         for (int i = 0; i <members.size(); i++) {
-            if (members.toArray()[i].getGroup().equals(group)){
+            if (n.getData().getGroup().equals(group)){
                 number++;
             }
+            n = n.getNextNode();
         }
         return number;
     }
