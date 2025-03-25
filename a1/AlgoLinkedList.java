@@ -45,10 +45,12 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
                     current.setData(null);
                     current.setIndex(-1);
                     current.setNextNode(null);
+                    size--;
                     return true;
                 }
                 updateIndexes(current.getNextNode(), current.getIndex());
-
+                size--;
+                return true;
             }
 
             if (current.getNextNode() != null) {
