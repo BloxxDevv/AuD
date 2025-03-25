@@ -16,7 +16,9 @@ public class Main {
             managementA1.remove("GI-100144");
             System.out.println(managementA1.members.size());
             printArray(managementA1.toArray());
-
+            managementA1.remove("GI-100145");
+            System.out.println(managementA1.members.size());
+            printArray(managementA1.toArray());
             System.out.println();
         } catch (IOException e) {
             throw new RuntimeException(e);

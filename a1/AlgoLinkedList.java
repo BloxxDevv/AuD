@@ -57,7 +57,8 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
                 if (current.getNextNode().getData().equals(m)) {
                     current.setNextNode(current.getNextNode().getNextNode());
                     updateIndexes(current, current.getIndex());
-                    break;
+                    size--;
+                    return true;
                 }
             }
             current = current.getNextNode();
