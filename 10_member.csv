@@ -1,11 +1,10 @@
 key;joiningdate;surname;forename;group;newsletter
 GI-100144;1994-08-14;Aamodt;Mokhtar;EMERITUS;false
 GI-100370;1988-09-03;Braunschweig;Leucio;EMERITUS;false
-GI-109776;1994-03-23;Reniek;Otto;STUDENT;true
-GI-105031;1986-07-28;Wolfenbüttel;Björn;FULL;true
 GI-108432;1987-10-17;Fischer;Frida;FULL;false
 GI-103383;1987-10-29;Silva-Ponte;Adam;STUDENT;true
 GI-102904;1990-05-20;Weiß;Schantall;FULL;false
 GI-102958;1992-12-17;Fischer;Frida;STUDENT;true
 GI-105345;1988-05-19;Reniek;Otto;REDUCED;true
 GI-100145;1985-09-10;Fischer;Frida;FULL;false
+GI-109776;1994-03-23;Reniek;Otto;STUDENT;true

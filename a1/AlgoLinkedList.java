@@ -5,6 +5,7 @@ import de.ostfalia.aud.ss25.base.IAlgoCollection;
 import de.ostfalia.aud.ss25.base.IMember;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 public class AlgoLinkedList implements IAlgoCollection<IMember> {
 
@@ -35,6 +36,7 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
     @Override
     public boolean remove(IMember m) {
         Node current = firstNode;
+
         while (current != null){
             if (current.getData().equals(m)) {
                 if (current.getNextNode() != null) {
@@ -58,6 +60,16 @@ public class AlgoLinkedList implements IAlgoCollection<IMember> {
                     current.setNextNode(current.getNextNode().getNextNode());
                     updateIndexes(current, current.getIndex());
                     size--;
+
+                    Node node = firstNode;
+                    for (int i = 0; i < size; i++) {
+                        if (i == size-1){
+                            lastNode = node;
+                            break;
+                        }
+                        node = node.getNextNode();
+                    }
+                    
                     return true;
                 }
             }

@@ -107,7 +107,10 @@ public class ManagementA1 implements IManagement {
 
     @Override
     public int indexOf(String id) {
-        return members.indexOf(search(id));
+        if (search(id) != null) {
+            return members.indexOf(search(id));
+        }
+        return -1;
     }
 
     @Override
