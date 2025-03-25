@@ -16,7 +16,7 @@ public class ManagementA1 implements IManagement {
 
     public ManagementA1(String[] data){
         for (int i = 0; i < data.length; i++) {
-            insert(new Member(data[i]));
+            members.add(new Member(data[i]));
         }
     }
 
@@ -24,7 +24,7 @@ public class ManagementA1 implements IManagement {
         BufferedReader br = new BufferedReader(new FileReader(dateiname));
         br.readLine();
         while (br.ready()){
-            insert(new Member(br.readLine()));
+            members.add(new Member(br.readLine()));
         }
     }
 
@@ -55,10 +55,13 @@ public class ManagementA1 implements IManagement {
 
     @Override
     public IMember search(String id) {
+        Node n = ((AlgoLinkedList)members).getFirstNode();
+
         for (int i = 0; i <members.size(); i++) {
-            if (members.toArray()[i].getId().equals(id)){
-                return members.toArray()[i];
+            if (n.getData().getId().equals(id)){
+                return n.getData();
             }
+            n = n.getNextNode();
         }
         return null;
     }
@@ -67,10 +70,13 @@ public class ManagementA1 implements IManagement {
     public IAlgoCollection<IMember> members(String surname, String forename) {
         IAlgoCollection<IMember> coll = new AlgoLinkedList();
 
+        Node n = ((AlgoLinkedList)members).getFirstNode();
+
         for (int i = 0; i <members.size(); i++) {
-            if (members.toArray()[i].getSurname().equals(surname) && members.toArray()[i].getForename().equals(forename)){
-                coll.add(members.toArray()[i]);
+            if (n.getData().getSurname().equals(surname) && n.getData().getForename().equals(forename)){
+                coll.add(n.getData());
             }
+            n = n.getNextNode();
         }
 
         return coll;
@@ -80,10 +86,13 @@ public class ManagementA1 implements IManagement {
     public IAlgoCollection<IMember> members(Group group) {
         IAlgoCollection<IMember> coll = new AlgoLinkedList();
 
+        Node n = ((AlgoLinkedList)members).getFirstNode();
+
         for (int i = 0; i <members.size(); i++) {
-            if (members.toArray()[i].getGroup().equals(group)){
-                coll.add(members.toArray()[i]);
+            if (n.getData().getGroup().equals(group)){
+                coll.add(n.getData());
             }
+            n = n.getNextNode();
         }
 
         return coll;

@@ -1,7 +1,5 @@
 package de.ostfalia.aud.ss25;
 
-import de.ostfalia.aud.ss25.a0.Member;
-import de.ostfalia.aud.ss25.a1.AlgoLinkedList;
 import de.ostfalia.aud.ss25.a1.ManagementA1;
 import de.ostfalia.aud.ss25.base.IMember;
 
@@ -11,7 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            ManagementA1 managementA1 = new ManagementA1("10_member.csv");
+            ManagementA1 managementA1 = new ManagementA1("40k_member.csv");
+
+            managementA1.search("GI-105987");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
